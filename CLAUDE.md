@@ -2,13 +2,18 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+This is a learning project. I want to build and write code myself. Your role is to guide me along the way, and answer questions I have.
+
 ## Project plan
+
 # Event Scheduler App - Development Plan
 
 ## Project Overview
+
 A simple event scheduling app built with Go (backend), React with TypeScript (frontend), SQLite (database), and styled with Tailwind CSS + DaisyUI.
 
 ## Tech Stack
+
 - **Backend**: Go with net/http package
 - **Database**: SQLite
 - **Frontend**: React with TypeScript
@@ -57,6 +62,7 @@ PATCH  /api/events/:id/finalize     - Lock in final date
 ```
 
 ## URL Structure (React Router)
+
 - `/` or `/create` - Host view for creating events
 - `/event/:eventId` - Respondent view for submitting availability
 - `/event/:eventId/results` - Host view for seeing results
@@ -66,12 +72,14 @@ PATCH  /api/events/:id/finalize     - Lock in final date
 ### Phase 1: Project Setup & Design System (Day 1)
 
 **Backend Tasks:**
+
 - Initialize Go module and project structure
 - Set up SQLite connection
 - Create database schema
 - Basic HTTP server with CORS
 
 **Frontend Tasks:**
+
 - Create React app with TypeScript
 - Install and configure Tailwind CSS + DaisyUI
 - Set up React Router
@@ -84,11 +92,13 @@ PATCH  /api/events/:id/finalize     - Lock in final date
 ### Phase 2: Event Creation - Styled Form (Days 2-3)
 
 **Backend Tasks:**
+
 - POST `/api/events` endpoint
 - Event model and database functions
 - UUID generation for event IDs
 
 **Frontend Tasks:**
+
 - Host UI with DaisyUI card layout
 - "Hva planlegger du?" heading
 - Rounded input field (input-bordered rounded-full)
@@ -100,12 +110,14 @@ PATCH  /api/events/:id/finalize     - Lock in final date
 ### Phase 3: Date/Time Selection with Calendar (Days 4-5)
 
 **Frontend Tasks:**
+
 - Integrate react-calendar with Tailwind styling
 - Custom time selection component (DaisyUI select/dropdown)
 - Selected dates display as DaisyUI badges
 - Remove functionality for selections
 
 **Backend Tasks:**
+
 - Update POST endpoint to handle date/time arrays
 - Create event_dates entries
 - Return complete event object
@@ -115,10 +127,12 @@ PATCH  /api/events/:id/finalize     - Lock in final date
 ### Phase 4: Shareable URL Generation (Day 6)
 
 **Backend Tasks:**
+
 - GET `/api/events/:id` endpoint
 - Return event with all dates
 
 **Frontend Tasks:**
+
 - Transform button to "Kopier lenke" after creation
 - Copy-to-clipboard functionality
 - DaisyUI toast for copy confirmation
@@ -130,6 +144,7 @@ PATCH  /api/events/:id/finalize     - Lock in final date
 ### Phase 5: Respondent View - Mobile-First (Days 7-8)
 
 **Frontend Tasks:**
+
 - Responsive mobile-first layout
 - Name input with form-control
 - Clickable date/time cards or button groups
@@ -137,6 +152,7 @@ PATCH  /api/events/:id/finalize     - Lock in final date
 - Submit button with loading state
 
 **Backend Tasks:**
+
 - POST `/api/events/:id/respond` endpoint
 - Respondent and response creation
 - Database transactions for atomic updates
@@ -146,10 +162,12 @@ PATCH  /api/events/:id/finalize     - Lock in final date
 ### Phase 6: Results View with Visualization (Day 9)
 
 **Backend Tasks:**
+
 - GET `/api/events/:id/results` endpoint
 - Response aggregation logic
 
 **Frontend Tasks:**
+
 - DaisyUI table for results display
 - Color-coded availability (badges/progress bars)
 - Avatar placeholders for respondents
@@ -161,10 +179,12 @@ PATCH  /api/events/:id/finalize     - Lock in final date
 ### Phase 7: Event Finalization (Day 10)
 
 **Backend Tasks:**
+
 - PATCH `/api/events/:id/finalize` endpoint
 - Update event with selected date
 
 **Frontend Tasks:**
+
 - "Lås denne tiden" button with lock icon
 - Confirmation modal (DaisyUI modal)
 - Success state styling
@@ -176,6 +196,7 @@ PATCH  /api/events/:id/finalize     - Lock in final date
 ### Phase 8: Polish & Responsive Design (Days 11-12)
 
 **Tasks:**
+
 - Skeleton loaders for all loading states
 - Error handling with DaisyUI alerts
 - Empty states with helpful messages
@@ -189,6 +210,7 @@ PATCH  /api/events/:id/finalize     - Lock in final date
 ## Key DaisyUI Components
 
 ### Essential Components:
+
 - **Forms**: input, select, form-control, label
 - **Buttons**: btn, btn-primary, btn-success, btn-accent
 - **Feedback**: alert, toast, badge, progress, loading
@@ -196,6 +218,7 @@ PATCH  /api/events/:id/finalize     - Lock in final date
 - **Data Display**: table, avatar
 
 ### Styling Guidelines:
+
 ```jsx
 // Card container
 <div className="card w-full max-w-md bg-base-100 shadow-xl">
@@ -270,6 +293,7 @@ PATCH  /api/events/:id/finalize     - Lock in final date
 ## MVP Definition
 
 Minimum viable product includes:
+
 - Create event with multiple date/time options
 - Generate shareable link
 - Collect responses from multiple users
