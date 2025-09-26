@@ -18,7 +18,7 @@ A simple event scheduling app built with Go (backend), React with TypeScript (fr
 - **Database**: SQLite
 - **Frontend**: React with TypeScript
 - **Routing**: React Router (single-page application)
-- **Styling**: Tailwind CSS + DaisyUI components
+- **Styling**: Tailwind CSS (pure, no component library)
 - **HTTP Client**: Axios
 
 ## Database Schema
@@ -81,9 +81,9 @@ PATCH  /api/events/:id/finalize     - Lock in final date
 **Frontend Tasks:**
 
 - Create React app with TypeScript
-- Install and configure Tailwind CSS + DaisyUI
+- Install and configure Tailwind CSS
 - Set up React Router
-- Choose DaisyUI theme (suggest "light" or "corporate")
+- Configure custom color palette and design tokens
 - Configure proxy to backend (port 8080)
 - Create base layout component
 
@@ -99,11 +99,11 @@ PATCH  /api/events/:id/finalize     - Lock in final date
 
 **Frontend Tasks:**
 
-- Host UI with DaisyUI card layout
+- Host UI with custom card styling (bg-white shadow-xl rounded-lg)
 - "Hva planlegger du?" heading
-- Rounded input field (input-bordered rounded-full)
-- "Opprett hendelse" button (btn-primary)
-- Loading states with DaisyUI spinner
+- Rounded input field (rounded-full border-gray-300)
+- "Opprett hendelse" button (bg-primary-500 text-white)
+- Loading states with custom spinner
 
 **Test Checkpoint:** Can create styled event and verify in database
 
@@ -112,8 +112,8 @@ PATCH  /api/events/:id/finalize     - Lock in final date
 **Frontend Tasks:**
 
 - Integrate react-calendar with Tailwind styling
-- Custom time selection component (DaisyUI select/dropdown)
-- Selected dates display as DaisyUI badges
+- Custom time selection component (styled select with Tailwind)
+- Selected dates display as custom badges (bg-gray-100 rounded-full)
 - Remove functionality for selections
 
 **Backend Tasks:**
@@ -168,9 +168,9 @@ PATCH  /api/events/:id/finalize     - Lock in final date
 
 **Frontend Tasks:**
 
-- DaisyUI table for results display
-- Color-coded availability (badges/progress bars)
-- Avatar placeholders for respondents
+- Custom table for results display (border-collapse border-gray-200)
+- Color-coded availability (custom badges/progress indicators)
+- Avatar placeholders with bg-gray-300 rounded-full
 - Highlight most popular times
 - Responsive overflow handling
 
@@ -186,7 +186,7 @@ PATCH  /api/events/:id/finalize     - Lock in final date
 **Frontend Tasks:**
 
 - "Lås denne tiden" button with lock icon
-- Confirmation modal (DaisyUI modal)
+- Confirmation modal (custom modal with backdrop-blur)
 - Success state styling
 - Update respondent view for finalized events
 - Disable non-selected options
@@ -198,7 +198,7 @@ PATCH  /api/events/:id/finalize     - Lock in final date
 **Tasks:**
 
 - Skeleton loaders for all loading states
-- Error handling with DaisyUI alerts
+- Error handling with custom alert styling (bg-red-50 text-red-800)
 - Empty states with helpful messages
 - Dark mode toggle (optional)
 - Mobile optimizations (44px tap targets)
@@ -207,39 +207,38 @@ PATCH  /api/events/:id/finalize     - Lock in final date
 - Timezone handling
 - Cross-browser testing
 
-## Key DaisyUI Components
+## Key Styling Patterns
 
-### Essential Components:
+### Essential Styling Patterns:
 
-- **Forms**: input, select, form-control, label
-- **Buttons**: btn, btn-primary, btn-success, btn-accent
-- **Feedback**: alert, toast, badge, progress, loading
-- **Layout**: card, modal, container
-- **Data Display**: table, avatar
+- **Forms**: Custom styled inputs with focus states
+- **Buttons**: Tailwind button variants with hover/active states
+- **Feedback**: Custom alert components with appropriate colors
+- **Layout**: Card-based layout with shadows and rounded corners
+- **Data Display**: Custom table and avatar styling
 
 ### Styling Guidelines:
 
 ```jsx
 // Card container
-<div className="card w-full max-w-md bg-base-100 shadow-xl">
+<div className="bg-white rounded-lg shadow-xl p-6 w-full max-w-md">
 
 // Rounded input
-<input className="input input-bordered rounded-full" />
+<input className="w-full px-4 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary-500" />
 
 // Primary button
-<button className="btn btn-primary w-full rounded-full">
+<button className="bg-primary-500 hover:bg-primary-600 text-white px-6 py-3 rounded-full font-medium transition-colors w-full">
 
 // Success toast
-<div className="toast toast-top toast-center">
-  <div className="alert alert-success">
+<div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
+  <div className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg shadow-lg">
 
 // Clickable date card
-<div className="card hover:shadow-lg transition-shadow
-                data-[selected=true]:border-primary">
+<div className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-lg transition-shadow cursor-pointer
+                data-[selected=true]:border-primary-500 data-[selected=true]:bg-primary-50">
 
 // Avatar placeholder
-<div className="avatar placeholder">
-  <div className="bg-neutral-focus text-neutral-content rounded-full w-8">
+<div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center text-gray-600 text-sm font-medium">
 ```
 
 ## Project Structure
