@@ -10,10 +10,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const showNavigation = location.pathname === '/create' || location.pathname === '/calendar';
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-100">
       <div className="container mx-auto px-4 py-8">
-        <main className="flex justify-center">
-          <div className="w-full max-w-2xl">
+        <main>
+          <div className="w-full">
             {children}
           </div>
         </main>

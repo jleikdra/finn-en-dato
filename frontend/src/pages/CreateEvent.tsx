@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Layout from '../components/Layout';
-import CalendarDatePicker from '../components/CalendarDatePicker';
+import CustomCalendar from '../components/CustomCalendar';
 import TimePicker from '../components/TimePicker';
 
 interface DateTimeOption {
@@ -126,14 +126,14 @@ const CreateEvent: React.FC = () => {
   if (createdEventId) {
     return (
       <Layout>
-        <div className="bg-white rounded-lg shadow-xl p-6 w-full">
+        <div className="bg-white rounded-lg shadow-xl p-8 w-full max-w-2xl mx-auto">
           <h2 className="text-2xl font-bold text-center text-green-600 mb-6">
             Hendelse opprettet! 🎉
           </h2>
           <p className="text-center mb-6">
             Del lenken under med deltakerne så de kan svare på tilgjengelighet:
           </p>
-          <div className="flex rounded-full border border-gray-300 overflow-hidden mb-6">
+          <div className="flex rounded-lg border border-gray-300 overflow-hidden mb-6">
             <input
               type="text"
               className="flex-1 px-4 py-3 bg-gray-50 text-gray-700 focus:outline-none"
@@ -167,33 +167,46 @@ const CreateEvent: React.FC = () => {
 
   return (
     <Layout>
-      <div className="bg-white rounded-lg shadow-xl p-6 w-full">
-        {/* Main Heading - First thing people see */}
-        <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">
+      <div className="w-full max-w-md mx-auto bg-white rounded-lg shadow-lg p-6">
+        {/* Main Heading */}
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 text-center mb-6 font-nunito">
           Hva planlegger du?
         </h1>
 
         {/* Event Name Input */}
-        <div className="mb-8">
+        <div className="mb-6">
           <input
             type="text"
-            placeholder="Navnet på hendelsen..."
-            className="w-full px-4 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent text-lg"
+            placeholder="Skriv hendelsesnavn..."
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#6366F1] focus:border-[#6366F1] bg-white font-nunito text-gray-900 placeholder-gray-500"
             value={eventName}
             onChange={(e) => setEventName(e.target.value)}
           />
         </div>
 
         {/* Calendar Component */}
-        <div className="mb-8">
-          <CalendarDatePicker
+        <div className="mb-6">
+          <CustomCalendar
             onDateSelect={handleDateSelect}
             selectedDates={selectedDates}
           />
         </div>
 
-        {/* Time Selection Modal */}
-        {showTimeSelection && pendingDate && (
+        {/* Create Event Button */}
+        <button
+          className="w-full bg-[#6366F1] hover:bg-indigo-700 disabled:bg-gray-300 text-white font-semibold py-3 px-4 rounded-lg shadow-md transition-colors disabled:cursor-not-allowed"
+          onClick={createEvent}
+          disabled={!eventName || dateTimeOptions.length === 0 || isLoading}
+        >
+          {isLoading && (
+            <span className="inline-block w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></span>
+          )}
+          Opprett hendelse
+        </button>
+      </div>
+
+      {/* Time Selection Modal */}
+      {showTimeSelection && pendingDate && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white rounded-lg p-6 w-full max-w-md mx-4">
               <h3 className="text-lg font-semibold mb-4">
@@ -236,48 +249,6 @@ const CreateEvent: React.FC = () => {
             </div>
           </div>
         )}
-
-        {/* Selected Date-Time Options */}
-        {dateTimeOptions.length > 0 && (
-          <div className="mb-8">
-            <h4 className="font-semibold mb-3 text-lg">Valgte datoer og tider:</h4>
-            <div className="space-y-2">
-              {dateTimeOptions.map((dto, index) => (
-                <div key={index} className="flex items-center justify-between bg-primary-50 border border-primary-200 rounded-lg px-4 py-3">
-                  <span className="text-primary-800 font-medium">
-                    {dto.date.toLocaleDateString('no-NO', {
-                      weekday: 'long',
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                    })} {dto.startTime} - {dto.endTime}
-                  </span>
-                  <button
-                    className="text-primary-400 hover:text-red-500 ml-2 w-6 h-6 flex items-center justify-center rounded-full hover:bg-red-50 transition-colors"
-                    onClick={() => handleDateSelect(dto.date)}
-                  >
-                    ✕
-                  </button>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Create Event Button */}
-        <div className="flex justify-center">
-          <button
-            className="bg-primary-500 hover:bg-primary-600 disabled:bg-gray-300 text-white px-12 py-4 rounded-full font-medium text-lg transition-colors disabled:cursor-not-allowed flex items-center justify-center gap-2"
-            onClick={createEvent}
-            disabled={!eventName || dateTimeOptions.length === 0 || isLoading}
-          >
-            {isLoading && (
-              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-            )}
-            Opprett hendelse
-          </button>
-        </div>
-      </div>
     </Layout>
   );
 };

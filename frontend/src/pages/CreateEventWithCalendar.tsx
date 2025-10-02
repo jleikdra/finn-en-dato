@@ -139,10 +139,10 @@ const CreateEventWithCalendar: React.FC = () => {
               Del lenken under med deltakerne så de kan svare på tilgjengelighet:
             </p>
             <div className="form-control">
-              <div className="input-group">
+              <div className="flex rounded-lg border border-gray-300 overflow-hidden">
                 <input
                   type="text"
-                  className="input input-bordered flex-1"
+                  className="flex-1 px-4 py-3 bg-gray-50 text-gray-700 focus:outline-none"
                   value={`${window.location.origin}/event/${createdEventId}`}
                   readOnly
                 />
@@ -181,39 +181,35 @@ const CreateEventWithCalendar: React.FC = () => {
 
   return (
     <Layout>
-      <div className="space-y-6">
+      <div className="space-y-6 max-w-sm">
         {/* Event Name */}
-        <div className="card w-full bg-base-100 shadow-xl">
-          <div className="card-body">
-            <h2 className="card-title text-center mb-6">
-              Hva planlegger du?
-            </h2>
-            <div className="form-control">
-              <input
-                type="text"
-                placeholder="Navnet på hendelsen..."
-                className="input input-bordered rounded-full text-center"
-                value={eventName}
-                onChange={(e) => setEventName(e.target.value)}
-              />
+        <div className="w-full">
+          <h1 className="text-3xl font-bold text-black mb-6 font-sans">
+            Hva planlegger du?
+          </h1>
+          <div className="relative w-full">
+            <input
+              type="text"
+              placeholder="i ressursene"
+              className="w-full pl-4 pr-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-gray-400 bg-white font-sans text-sm"
+              value={eventName}
+              onChange={(e) => setEventName(e.target.value)}
+            />
+            <div className="absolute right-3 top-1/2 -translate-y-1/2">
+              <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="8" strokeWidth="2"/>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m21 21-4.35-4.35"/>
+              </svg>
             </div>
           </div>
         </div>
 
         {/* Calendar Selection */}
-        <div className="card w-full bg-base-100 shadow-xl">
-          <div className="card-body">
-            <h3 className="text-lg font-semibold mb-4">
-              Velg mulige datoer
-            </h3>
-            <p className="text-sm text-base-content/70 mb-4">
-              Klikk på datoene du vil foreslå for hendelsen
-            </p>
-            <CalendarDatePicker
-              onDateSelect={handleDateSelect}
-              selectedDates={selectedDates}
-            />
-          </div>
+        <div className="w-full border border-gray-300 rounded p-4 bg-white">
+          <CalendarDatePicker
+            onDateSelect={handleDateSelect}
+            selectedDates={selectedDates}
+          />
         </div>
 
         {/* Time Selection Modal */}

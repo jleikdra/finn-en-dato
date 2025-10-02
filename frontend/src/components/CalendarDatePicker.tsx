@@ -46,79 +46,83 @@ const CalendarDatePicker: React.FC<CalendarDatePickerProps> = ({ onDateSelect, s
   };
 
   return (
-    <div className="calendar-container">
+    <div className="calendar-container p-3">
       <style jsx>{`
         .calendar-container :global(.react-calendar) {
           width: 100%;
-          background: transparent;
-          border: 1px solid hsl(var(--bc) / 0.2);
-          border-radius: 0.5rem;
-          font-family: inherit;
-          line-height: 1.125em;
+          background: white;
+          border: none;
+          font-family: 'Nunito Sans', sans-serif;
         }
 
         .calendar-container :global(.react-calendar__navigation) {
           display: flex;
-          height: 44px;
-          margin-bottom: 1em;
+          height: 32px;
+          margin-bottom: 0.75em;
         }
 
         .calendar-container :global(.react-calendar__navigation button) {
-          min-width: 44px;
+          min-width: 32px;
           background: transparent;
           border: none;
-          color: hsl(var(--bc));
-          font-size: 1rem;
-          font-weight: 500;
+          color: #000;
+          font-size: 0.875rem;
+          font-weight: 400;
         }
 
         .calendar-container :global(.react-calendar__navigation button:hover) {
-          background-color: hsl(var(--b2));
+          background-color: #f3f4f6;
         }
 
-        .calendar-container :global(.react-calendar__navigation button:disabled) {
-          background-color: transparent;
-          color: hsl(var(--bc) / 0.3);
+        .calendar-container :global(.react-calendar__navigation__label) {
+          font-weight: 400;
         }
 
         .calendar-container :global(.react-calendar__month-view__weekdays) {
           text-align: center;
           text-transform: uppercase;
-          font-weight: bold;
-          font-size: 0.75em;
-          color: hsl(var(--bc) / 0.7);
+          font-weight: 600;
+          font-size: 0.7rem;
+          color: #000;
         }
 
         .calendar-container :global(.react-calendar__month-view__weekdays__weekday) {
-          padding: 0.5em;
+          padding: 0.4em;
+        }
+
+        .calendar-container :global(.react-calendar__month-view__weekdays abbr) {
+          text-decoration: none;
         }
 
         .calendar-container :global(.react-calendar__month-view__days__day) {
-          color: hsl(var(--bc));
-          padding: 0.75em 0.5em;
+          color: #000;
+          padding: 0.5em;
           background: transparent;
           border: none;
           cursor: pointer;
+          font-size: 0.875rem;
         }
 
-        .calendar-container :global(.react-calendar__month-view__days__day:hover) {
-          background-color: hsl(var(--b2));
-          border-radius: 0.375rem;
+        .calendar-container :global(.react-calendar__month-view__days__day--neighboringMonth) {
+          color: #d1d5db;
         }
 
-        .calendar-container :global(.react-calendar__tile--now) {
-          background: hsl(var(--b2));
-          border-radius: 0.375rem;
+        .calendar-container :global(.react-calendar__month-view__days__day:hover:not(:disabled)) {
+          background-color: #f3f4f6;
         }
 
         .calendar-container :global(.react-calendar__tile--active) {
-          background: hsl(var(--p));
-          color: hsl(var(--pc));
-          border-radius: 0.375rem;
+          background: #2563eb !important;
+          color: white !important;
         }
 
         .calendar-container :global(.react-calendar__tile--active:hover) {
-          background: hsl(var(--p));
+          background: #1d4ed8 !important;
+        }
+
+        .calendar-container :global(.react-calendar__tile:disabled) {
+          color: #d1d5db;
+          cursor: not-allowed;
         }
       `}</style>
 
@@ -131,27 +135,8 @@ const CalendarDatePicker: React.FC<CalendarDatePickerProps> = ({ onDateSelect, s
         locale="no-NO"
         prev2Label={null}
         next2Label={null}
-        showNeighboringMonth={false}
+        showNeighboringMonth={true}
       />
-
-      {selectedDates.length > 0 && (
-        <div className="mt-4">
-          <p className="text-sm font-medium text-base-content/70 mb-2">
-            Valgte datoer ({selectedDates.length}):
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {selectedDates.map((date, index) => (
-              <div key={index} className="badge badge-primary badge-outline">
-                {date.toLocaleDateString('no-NO', {
-                  weekday: 'short',
-                  month: 'short',
-                  day: 'numeric'
-                })}
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   );
 };

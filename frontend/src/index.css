@@ -1,3 +1,13 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+/* Ensure Nunito Sans is applied globally */
+body {
+  font-family: 'Nunito Sans', ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Force Nunito Sans on specific elements */
+.font-nunito {
+  font-family: 'Nunito Sans', ui-sans-serif, system-ui, sans-serif !important;
+}
+/* Additional global styles can be added here */
+
